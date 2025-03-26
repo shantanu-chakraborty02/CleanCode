@@ -1,0 +1,254 @@
+#-----------------------------------------------------------------
+##Review 1: IsShopOpen Method
+
+#Original Code
+public bool IsShopOpen(string day)
+{
+    if (!string.IsNullOrEmpty(day))
+    {
+        day = day.ToLower();
+        if (day == "friday")
+        {
+            return true;
+        }
+        else if (day == "saturday")
+        {
+            return true;
+        }
+        else if (day == "sunday")
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    else
+    {
+        return false;
+    }
+}
+
+#Problem
+	• High cognitive complexity due to nested conditionals
+	• Multiple repeated return true statements
+	• Chain of if-else statements that could be simplified
+	• Deep nesting makes the code hard to follow
+
+#Fix
+public bool IsShopOpen(string day)
+{
+    // Early return for invalid input
+    if (string.IsNullOrEmpty(day))
+    {
+        return false;
+    }
+    
+    // Use a collection to check valid days
+    var openDays = new[] { "friday", "saturday", "sunday" };
+    return openDays.Contains(day.ToLower());
+}
+
+#Cognitive Complexity Before and After
+Review 1: IsShopOpen Method
+
+Before: 6
+After: 1
+Cause: Nested conditionals with multiple levels and chained if-else statements
+Improvement: Used early return pattern and replaced multiple conditionals with a collection-based approach using Contains()
+
+#----------------------------------------------------------------------
+##Review 3: Fibonacci Method
+Original Code
+public long Fibonacci(int n)
+{
+    if (n < 50)
+    {
+        if (n != 0)
+        {
+            if (n != 1)
+            {
+                return Fibonacci(n - 1) + Fibonacci(n - 2);
+            }
+            else
+            {
+                return 1;
+            }
+        }
+        else
+        {
+            return 0;
+        }
+    }
+    else
+    {
+        throw new System.Exception("Not supported");
+    }
+}
+
+#Problem
+	• Extremely high cognitive complexity with deeply nested conditionals
+	• Recursive calls add additional complexity
+	• Negative logic (n != 0, n != 1) is harder to follow than positive logic
+	• Deep nesting makes the code very difficult to understand
+
+#Fix
+public long Fibonacci(int n)
+{
+    // Early validation
+    if (n >= 50)
+    {
+        throw new System.Exception("Not supported");
+    }
+    
+    // Base cases with early returns
+    if (n == 0) return 0;
+    if (n == 1) return 1;
+    
+    // Recursive case
+    return Fibonacci(n - 1) + Fibonacci(n - 2);
+}
+
+#Cognitive Complexity Before and After
+Review 3: Fibonacci Method
+
+Before: 8
+After: 3
+Cause: Deeply nested conditionals (3 levels deep) with negative logic and excessive else branches
+Improvement: Applied early returns, eliminated nesting, and used positive conditionals instead of negative ones
+
+#--------------------------------------------------------------------------------
+##Review 4: City List Processing
+
+#Original Code
+var l = new[] { "Austin", "New York", "San Francisco" };
+for (var i = 0; i < l.Count(); i++)
+{
+    var li = l[i];
+    DoStuff();
+    DoSomeOtherStuff();
+// ...
+    // ...
+    // ...
+    // Wait, what is `li` for again?
+    Dispatch(li);
+}
+
+#Problem
+	• Poor variable naming (l, li) makes code hard to understand
+	• Large gap between variable declaration and usage creates confusion
+	• Using index-based iteration when direct iteration would be clearer
+	• Comment indicates the code is confusing even to its author
+
+#Fix
+var cities = new[] { "Austin", "New York", "San Francisco" };
+foreach (var city in cities)
+{
+    DoStuff();
+    DoSomeOtherStuff();
+    
+    // Process each city
+    Dispatch(city);
+}
+
+#Cognitive Complexity Before and After
+Review 4: City List Processing
+
+Before: 1
+After: 1
+Cause: Poor variable naming rather than structural complexity
+Improvement: No change in complexity score, but improved readability with better variable names and using foreach instead of for loop
+
+#-----------------------------------------------------------------------------
+##Review 5: Admin Role Check
+
+#Original Code
+if (userRole == 8) // Check if Admin 
+{
+    
+}
+
+#Problem
+	• Magic number (8) with only a comment explaining its meaning
+	• Hard to maintain if role codes change
+	• Violates clean code principles for magic numbers
+
+#Fix
+const int AdminRoleId = 8;
+if (userRole == AdminRoleId)
+{
+    // Admin-specific logic
+}
+
+#Cognitive Complexity Before and After
+Review 5: Admin Role Check
+
+Before: 1
+After: 1
+Cause: Magic number usage, not structural complexity
+Improvement: No change in complexity score, but improved maintainability by replacing magic number with a named constant
+
+
+#----------------------------------------------------------------------------------
+##Review 6: Car Class Properties
+
+#Original Code
+public class Car
+{
+    public string CarMake { get; set; }
+    public string CarModel { get; set; }
+    public string CarColor { get; set; }
+//...
+}
+
+#Problem
+	• Redundant class name prefix in property names
+	• Properties should be named based on their meaning, not the class they belong to
+
+#Fix
+public class Car
+{
+    public string Make { get; set; }
+    public string Model { get; set; }
+    public string Color { get; set; }
+//...
+}
+
+#Cognitive Complexity Before and After
+Review 6: Car Class Properties
+
+Before: 0
+After: 0
+Cause: Naming convention issue, not complexity
+Improvement: No change in complexity, but improved readability by removing redundant class name prefixes
+
+
+#------------------------------------------------------------------------------------------
+##Review 9: CreateMicrobrewery Method
+
+#Original Code
+public void CreateMicrobrewery(string name = null)
+{
+    var breweryName = !string.IsNullOrEmpty(name) ? name : "Hipster Brew Co.";
+    // ...
+}
+
+#Problem
+	• Using null as default parameter value instead of a more explicit approach
+	• Method uses negation in the conditional which slightly increases cognitive load
+
+#Fix
+public void CreateMicrobrewery(string name = "Hipster Brew Co.")
+{
+    var breweryName = name;
+    // ...
+}
+
+#Cognitive Complexity Before and After
+Review 9: CreateMicrobrewery Method
+
+Before: 1
+After: 0
+Cause: Unnecessary null handling with negation in conditional
+Improvement: Eliminated the conditional entirely by using default parameter value
