@@ -1,0 +1,54 @@
+#review1.cs
+Original: int d; // elapsed time in days
+
+Fixed: int elapsedDays; // Renamed for clarity
+
+
+#review2.cs
+
+Original: var dataFromDb = db.GetFromService().ToList(); // Get List of employees
+
+Fixed: var employees = db.GetFromService().ToList(); // Renamed for better context
+
+
+#review3.cs
+
+Original: int iCounter; string strFullName; DateTime dModifiedDate;
+
+Fixed: int counter; // Removed Hungarian notation string fullName; // Renamed to camelCase DateTime modifiedDate; // Renamed to camelCase
+
+
+#review4.cs
+
+Original: public bool IsShopOpen(string pDay, int pAmount) { // some logic }
+
+Fixed: public bool IsShopOpen(string day, int amount) // Renamed parameters to camelCase { // some logic }
+
+
+#review5.cs
+
+Original: const int DAYS_IN_WEEK = 7; const int daysInMonth = 30;
+var songs = new List<string> { 'Back In Black', 'Stairway to Heaven', 'Hey Jude' }; var Artists = new List<string> { 'ACDC', 'Led Zeppelin', 'The Beatles' };
+bool EraseDatabase() {} bool Restore_database() {}
+class animal {} class Alpaca {}
+
+Fixed: const int DaysInWeek = 7; // PascalCase for constants const int DaysInMonth = 30; // PascalCase for constants
+var songs = new List<string> { "Back In Black", "Stairway to Heaven", "Hey Jude" }; // Fixed quotes var artists = new List<string> { "ACDC", "Led Zeppelin", "The Beatles" }; // Renamed to camelCase
+bool EraseDatabase() {} // PascalCase bool RestoreDatabase() {} // Removed underscore
+class Animal {} // PascalCase for class name class Alpaca {} // Correct PascalCase
+
+
+#review6.cs
+
+Original: public class Employee { public Datetime sWorkDate { get; set; } // get set Start Working Date public Datetime modTime { get; set; } // get set Modification Time }
+
+Fixed: public class Employee { public DateTime WorkDate { get; set; } // Fixed type & naming public DateTime ModifiedTime { get; set; } // Fixed type & naming }
+
+
+#review7.cs
+
+Original: var employeephone;
+public double CalculateSalary(int workingdays, int workinghours) { // some logic }
+
+Fixed: var employeePhone; // Renamed to camelCase
+public double CalculateSalary(int workingDays, int workingHours) // Renamed to camelCase { // some logic }
